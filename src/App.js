@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Utils from './Utils';
 
 class Model {
   constructor() {
@@ -18,7 +19,7 @@ class Model {
   }
   addTodo(text) {
     this.phoneNumbers.push({
-      //id: Utils.uuid(),
+      id: Utils.uuid(),
       text: text,
       completed: false
     });

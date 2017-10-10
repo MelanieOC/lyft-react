@@ -1,4 +1,13 @@
 import React, { Component } from 'react';
+
+import {
+	BrowserRouter,
+	Route,
+	Switch,
+	NavLink,
+	Redirect
+} from 'react-router-dom';
+
 import './Forms.css';
 import Utils from './Utils';
 import flag_chile from './img/flag_chile.png';
@@ -43,7 +52,7 @@ class SingUp extends Component {
       <div>
         <header className="text-center">
           <div className="regresar">
-            <a href="index.html"><i className="fa fa-angle-left fa-3x" aria-hidden="true"></i></a>
+            <a href="javascript:window.history.back();"><i className="fa fa-angle-left fa-3x" aria-hidden="true"></i></a>
           </div>
           <h1>Sign up</h1>
           <h4>Join now for free ride credit</h4>
@@ -84,17 +93,13 @@ class SingUp extends Component {
           <div className="ocultar alert alert-warning text-center">
             Your PIN number is: <span id="cod-lab"> LAB - {this.pinGenerator()}</span>
           </div>
-        </section>
+        </section>     
         
-        {this.state.showPin ?
         <section className="next">
-          <button className="btn-lg" id="boton_telefono">Next</button>
+          <NavLink to={"/signup-form"} className="btn-lg" id="boton_telefono">
+            Next
+          </NavLink>
         </section>
-        :
-        <section className="next">
-          <button className="btn-lg disabled" id="boton_telefono">Next</button>
-        </section>
-        }
       </div>
     );
   }

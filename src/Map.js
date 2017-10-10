@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './img/logo-pink.png';
 import usuario from './img/usuario.png';
 import './App.css';
+import Utils from './Utils.js';
 //https://maps.googleapis.com/maps/api/js?key=AIzaSyCl5FxNRuSN9tRMoZFJsH_q511Zt6DBVH4&libraries=places
 //AIzaSyCl5FxNRuSN9tRMoZFJsH_q511Zt6DBVH4
 
@@ -24,9 +25,17 @@ const MyMapComponent = withScriptjs(withGoogleMap(props =>
 ));
 
 class LyftMap extends Component {
-  state = {
-    center: { lat: -16.3988900, lng: -71.5350000 },
-    bounds: null
+  constructor(props){
+    super(props);
+    this.inputValue=null;
+    this.state = {
+      center: { lat: -16.3988900, lng: -71.5350000 },
+      bounds: null
+    }
+  }
+  guardar(){
+    localStorage.setItem('nn',this.inputValue);
+    console.log(localStorage);
   }
   render() {
     return (
@@ -68,8 +77,8 @@ class LyftMap extends Component {
                 </div>
               </div>
               <div id="origen" className="form-control"></div>
-              <input type="text" id="destino" className="form-control" />
-              <button type="button" className="btn" id="ruta">Set pickup</button>
+              <input type="text" id="destino" className="form-control" onChange={e=>this.inputValue=e.target.value}/>
+              <button type="button" className="btn" id="ruta" onClick={()=>this.guardar()}>Set pickup</button>
               <button type="button" className="btn" id="solicitar" data-toggle="modal" data-target="#myModal">Request Lyft</button>
             </div>
           </div>

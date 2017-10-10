@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './Forms.css';
 import Utils from './Utils';
+import flag_chile from './img/flag_chile.png';
+import flag_peru from './img/flag_peru.png';
+import flag_mexico from './img/flag_mexico.png';
 
 class Model {
   constructor() {
@@ -35,7 +37,12 @@ class Model {
   }
 }
 
-const App = () => {
+class App extends Component {
+ /*constructor(){
+
+  }*/
+
+  render(){
   return (
     <div>
       <header className="text-center">
@@ -53,13 +60,13 @@ const App = () => {
             <div className="col-sm-3 col-xs-3">
               <div className="dropdown">
                 <div className="dropdown-toggle" data-toggle="dropdown">
-                  <img className="img-responsive" src="src/img/flag_peru.png" />
+                  <img className="img-responsive" src={flag_peru} alt='flag_peru'/>
                   <span className="caret"></span>
                 </div>
                 <ul className="dropdown-menu">
-                  <li><a id="+51" href="#"><img className="img-responsive" src="src/img/flag_peru.png" /> Perú</a></li>
-                  <li><a id="+56" href="#"><img className="img-responsive" src="src/img/flag_chile.png" /> Chile</a></li>
-                  <li><a id="+52" href="#"><img className="img-responsive" src="src/img/flag_mexico.png" /> Mexico</a></li>
+                  <li><a id="+51" ><img className="img-responsive" src={flag_peru} alt='flag_peru'/> Perú</a></li>
+                  <li><a id="+56" ><img className="img-responsive" src={flag_chile} alt='flag_chile'/> Chile</a></li>
+                  <li><a id="+52" ><img className="img-responsive" src={flag_mexico} alt='flag_mexico'/> Mexico</a></li>
                 </ul>
               </div>
             </div>
@@ -86,6 +93,7 @@ const App = () => {
       </section>
     </div>
   );
+}
 }
 
 export default App;

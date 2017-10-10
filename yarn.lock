@@ -2523,7 +2523,7 @@ fb-watchman@^2.0.0:
   dependencies:
     bser "^2.0.0"
 
-fbjs@^0.8.16:
+fbjs@^0.8.1, fbjs@^0.8.16:
   version "0.8.16"
   resolved "https://registry.yarnpkg.com/fbjs/-/fbjs-0.8.16.tgz#5e67432f550dc41b572bf55847b8aca64e5337db"
   dependencies:
@@ -3239,7 +3239,7 @@ interpret@^1.0.0:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/interpret/-/interpret-1.0.4.tgz#820cdd588b868ffb191a809506d6c9c8f212b1b0"
 
-invariant@^2.2.2:
+invariant@^2.2.1, invariant@^2.2.2:
   version "2.2.2"
   resolved "https://registry.yarnpkg.com/invariant/-/invariant-2.2.2.tgz#9e1f56ac0acdb6bf303306f338be3b204ae60360"
   dependencies:
@@ -5207,9 +5207,9 @@ react-error-overlay@^2.0.2:
     settle-promise "1.0.0"
     source-map "0.5.6"
 
-react-google-maps@^8.3.5:
-  version "8.3.5"
-  resolved "https://registry.yarnpkg.com/react-google-maps/-/react-google-maps-8.3.5.tgz#52a8fa9de0815a74027c6a0bc1a42a517c5e5a7c"
+react-google-maps@^8.4.0:
+  version "8.4.0"
+  resolved "https://registry.yarnpkg.com/react-google-maps/-/react-google-maps-8.4.0.tgz#3b6cef0fd355c5b82fe08da2b9e07a657e901a59"
   dependencies:
     babel-runtime "^6.11.6"
     can-use-dom "^0.1.0"

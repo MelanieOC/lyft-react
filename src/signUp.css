@@ -2,6 +2,15 @@ input{
 	font-size: 120%;
 }
 
+.input-close .dropdown{
+	margin: 0 auto;
+	width: 80%;
+}
+.dropdown img{
+	width: 60%;
+	display: inline-block;
+}
+
 .regresar{
 	position: absolute;
 	top: 2%;
@@ -12,12 +21,7 @@ input{
 	color: black;
 }
 
-#boton_usuario{
+#boton_telefono{
 	text-decoration: none;
 	color: white;
-}
-
-.error{
-	color: red;
-	font-size: 80%;
 }

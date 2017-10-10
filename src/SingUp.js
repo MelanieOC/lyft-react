@@ -1,5 +1,14 @@
 import React, { Component } from 'react';
-import './Forms.css';
+
+import {
+  BrowserRouter,
+  Route,
+  Switch,
+  NavLink,
+  Redirect
+} from 'react-router-dom';
+
+import './signUp.css';
 import Utils from './Utils';
 import flag_chile from './img/flag_chile.png';
 import flag_peru from './img/flag_peru.png';
@@ -15,7 +24,8 @@ class SingUp extends Component {
     this.state = {
       currentFlag: 0,
       showPin: false,
-      validar: false
+      validar: false,
+      next: false
     }
   }
   changeFlag(num) {
@@ -37,16 +47,19 @@ class SingUp extends Component {
         });
       }
     }
-    const mostrarPin = ()=>{
+    const mostrarPin = () => {
       this.setState({
-        showPin: true
+        showPin: true,
+        next: true
       });
     }
     return (
       <div>
         <header className="text-center">
           <div className="regresar">
-            <a href="index.html"><i className="fa fa-angle-left fa-3x" aria-hidden="true"></i></a>
+            <NavLink to="/home">
+              <i className="fa fa-angle-left fa-3x" aria-hidden="true"></i>
+            </NavLink>
           </div>
           <h1>Sign up</h1>
           <h4>Join now for free ride credit</h4>
@@ -91,7 +104,8 @@ class SingUp extends Component {
           }
         </section>
         <section className="next">
-          <button className={this.state.validar ? "btn-lg" : "btn-lg disabled"} onClick={mostrarPin}>Next</button>
+          {this.state.next && <NavLink to={"/signup-form"} className="btn btn-lg btn-next" > Next</NavLink>}
+          {!this.state.next && <button className={this.state.validar ? "btn-lg btn-next" : "btn-lg btn-next disabled"} disabled={!this.state.validar} onClick={mostrarPin}>Next</button>}
         </section>
       </div>
     );

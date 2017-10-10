@@ -1,4 +1,12 @@
 import React, { Component } from 'react';
+import {
+	BrowserRouter,
+	Route,
+	Switch,
+	NavLink,
+	Redirect
+} from 'react-router-dom';
+
 import logo from './logo.svg';
 import './Forms.css';
 
@@ -8,10 +16,11 @@ class Form extends Component {
 		super(props);
 		this.state = {
 			goFordward: false,
-			validacion: false
+			validacion: false,
+			siguiente: false
 		}
 	}
-	
+
 	render() {
 		const { model } = this.props;
 
@@ -20,17 +29,27 @@ class Form extends Component {
 				goFordward: e.target.checked
 			});
 		}
-		const validaciones=()=> {
+		const validaciones = () => {
 			this.setState({
 				validacion: true
 			});
-			console.log(model.nombre)
+			if (model.nombre === '' && model.apellido === '' && model.email === '' && !(/\S+@\S+\.\S+/.test(model.email))) {
+				this.setState({
+					siguiente: false
+				});
+			} else {
+				this.setState({
+					siguiente: true
+				});
+			}
 		}
 		return (
 			<div>
 				<header className="text-center">
 					<div className="regresar">
-						<a href="signup_phone.html"><i className="fa fa-angle-left fa-3x" aria-hidden="true"></i></a>
+						<NavLink to="/signup">
+							<i className="fa fa-angle-left fa-3x" aria-hidden="true"></i>
+						</NavLink>
 					</div>
 					<h1>Sign up</h1>
 					<h4>Join now for free ride credit</h4>
@@ -49,7 +68,7 @@ class Form extends Component {
 							<div className="col-sm-5 col-xs-5">
 								<input type="text" defaultValue='' placeholder="Last Name" onChange={e => model.apellido = e.target.value} />
 								{model.apellido === '' && this.state.validacion && <p className="error">Please enter a last name</p>}
-		
+
 							</div>
 						</div>
 					</div>
@@ -61,8 +80,8 @@ class Form extends Component {
 							<div className="col-sm-8 col-xs-8">
 								<input type="email" defaultValue='' placeholder="Email" onChange={e => model.email = e.target.value} />
 								{model.email === '' && this.state.validacion && <p className="error">Please enter an email</p>}
-								{model.email !== ''&& !(/\S+@\S+\.\S+/.test(model.email)) && this.state.validacion && <p className="error">Not a valid email</p>}
-							
+								{model.email !== '' && !(/\S+@\S+\.\S+/.test(model.email)) && this.state.validacion && <p className="error">Not a valid email</p>}
+
 							</div>
 						</div>
 					</div>
@@ -77,8 +96,10 @@ class Form extends Component {
 					</div>
 				</section>
 				<section className="next">
-					<button className={this.state.goFordward ? "btn-lg" : "btn-lg disabled"} onClick={validaciones} id="boton_usuario">Next</button>
+					{this.state.siguiente && <NavLink to={"/lyftmap"} className="btn btn-lg btn-next" id="boton_usuario">Next</NavLink>}
+					{!this.state.siguiente && <button className={this.state.goFordward ? "btn-lg btn-next" : "btn-lg btn-next disabled"} disabled={!this.state.goFordward} onClick={validaciones} id="boton_usuario">Next</button>}
 				</section>
+
 			</div>
 		);
 	}

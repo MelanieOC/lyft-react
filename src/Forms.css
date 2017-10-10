@@ -74,13 +74,11 @@ input{
 .error{
 	color: red;
 	font-size: 80%;
-	display: none;
 }
 
 .next .disabled{
 	opacity: 0.5;
 }
-
 
 .sidenav {
     height: 100%;

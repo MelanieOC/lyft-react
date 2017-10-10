@@ -8,37 +8,40 @@ import flag_mexico from './img/flag_mexico.png';
 class SingUp extends Component {
   constructor(props) {
     super(props);
-    this.inputNumber = undefined;
-    this.newPin = [];
+    this.flags = [
+      { pais: 'Perú', src: flag_peru, cod: '+51', length: 9 },
+      { pais: 'Chile', src: flag_chile, cod: '+56', length: 9 },
+      { pais: 'Mexico', src: flag_mexico, cod: '+52', length: 10 }];
     this.state = {
-      number: [],
-      showPin : false,
-      phoneNumber : undefined
+      currentFlag: 0,
+      showPin: false,
+      validar: false
     }
   }
-
-  pinGenerator(){
-    let pin = Math.floor(Math.random() * (999-100));
-    return pin;
+  changeFlag(num) {
+    this.setState({
+      currentFlag: num,
+      validar: false
+    });
   }
-
-  getNumber(input){
-    console.log(input);
-
-    if(input.length === 9){
+  render() {
+    const { model } = this.props;
+    const onInputChange = (e) => {
+      if (e.target.value.length === this.flags[this.state.currentFlag].length) {
+        this.setState({
+          validar: true
+        });
+      } else {
+        this.setState({
+          validar: false
+        });
+      }
+    }
+    const mostrarPin = ()=>{
       this.setState({
         showPin: true
       });
-      this.pinGenerator();
-    }else{
-      this.setState({
-        showPin: false
-      })
     }
-  }
-
-
-  render() {
     return (
       <div>
         <header className="text-center">
@@ -49,30 +52,30 @@ class SingUp extends Component {
           <h4>Join now for free ride credit</h4>
           <hr />
         </header>
-        
+
         <section className="container">
           <div className="input-close container">
             <div className="row">
               <div className="col-sm-3 col-xs-3">
                 <div className="dropdown">
                   <div className="dropdown-toggle" data-toggle="dropdown">
-                    <img className="img-responsive" src={flag_peru} alt='flag_peru' />
+                    <img className="img-responsive" src={this.flags[this.state.currentFlag].src} alt='flag_peru' />
                     <span className="caret"></span>
                   </div>
                   <ul className="dropdown-menu">
-                    <li><a id="+51" ><img className="img-responsive" src={flag_peru} alt='flag_peru' /> Perú</a></li>
-                    <li><a id="+56" ><img className="img-responsive" src={flag_chile} alt='flag_chile' /> Chile</a></li>
-                    <li><a id="+52" ><img className="img-responsive" src={flag_mexico} alt='flag_mexico' /> Mexico</a></li>
+                    {this.flags.map((a, index) => {
+                      return <li><a><img className="img-responsive" src={a.src} alt='flag_peru' onClick={() => this.changeFlag(index)} /> {a.pais}</a></li>
+                    })}
                   </ul>
                 </div>
               </div>
               <div className="col-sm-2 col-xs-2">
-                <input type="text" id="codigo" value="+51" />
+                <input type="text" id="codigo" value={this.flags[this.state.currentFlag].cod} />
               </div>
               <div className="col-sm-7 col-xs-7" >
-                <input type="number" id="telefono" placeholder="999999999" maxLength='9' minLength='9' 
-                  value={this.valorInput}
-                  onChange={ e=>(this.inputNumber = e.target) } />
+                <input type="number" id="telefono" placeholder="999999999"
+                  onKeyUp={onInputChange}
+                />
               </div>
             </div>
           </div>
@@ -81,20 +84,15 @@ class SingUp extends Component {
               <p>We'll send you a text to verify your phone</p>
             </div>
           </div>
-          <div className="ocultar alert alert-warning text-center">
-            Your PIN number is: <span id="cod-lab"> LAB - {this.pinGenerator()}</span>
-          </div>
+          {this.state.showPin &&
+            <div className=" alert alert-warning text-center">
+              Your PIN number is: <span id="cod-lab"> LAB - {Math.floor(Math.random() * (999 - 100))}</span>
+            </div>
+          }
         </section>
-        
-        {this.state.showPin ?
         <section className="next">
-          <button className="btn-lg" id="boton_telefono">Next</button>
+          <button className={this.state.validar ? "btn-lg" : "btn-lg disabled"} onClick={mostrarPin}>Next</button>
         </section>
-        :
-        <section className="next">
-          <button className="btn-lg disabled" id="boton_telefono">Next</button>
-        </section>
-        }
       </div>
     );
   }

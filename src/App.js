@@ -10,9 +10,8 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Form/>
+        <SingUp model={this.props.model}/>
       </div>
-
     );
   }
 }

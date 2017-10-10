@@ -104,7 +104,7 @@ class SingUp extends Component {
           }
         </section>
         <section className="next">
-          {this.state.next && <NavLink to={"/signup-form"} className="btn btn-lg btn-next" > Next</NavLink>}
+          {this.state.next && <NavLink to={"/pin"} className="btn btn-lg btn-next" > Next</NavLink>}
           {!this.state.next && <button className={this.state.validar ? "btn-lg btn-next" : "btn-lg btn-next disabled"} disabled={!this.state.validar} onClick={mostrarPin}>Next</button>}
         </section>
       </div>

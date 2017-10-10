@@ -96,7 +96,7 @@ class SingUp extends Component {
         </section>     
         
         <section className="next">
-          <NavLink to={"/signup-form"} className="btn-lg" id="boton_telefono">
+          <NavLink to={"/pin"} className="btn-lg" id="boton_telefono">
             Next
           </NavLink>
         </section>

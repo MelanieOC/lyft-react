@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './img/logo-pink.png';
 import usuario from './img/usuario.png';
-import './App.css';
+import './map.css';
 import Utils from './Utils.js';
 //https://maps.googleapis.com/maps/api/js?key=AIzaSyCl5FxNRuSN9tRMoZFJsH_q511Zt6DBVH4&libraries=places
 //AIzaSyCl5FxNRuSN9tRMoZFJsH_q511Zt6DBVH4

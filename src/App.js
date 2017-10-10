@@ -12,6 +12,7 @@ import './App.css';
 
 import Home from "./Home.js";
 import SingUp from "./SingUp.js";
+import Pin from "./Pin.js";
 import Form from "./form.js";
 import LyftMap from "./Map.js";
 
@@ -31,6 +32,7 @@ class App extends Component {
                   render={() => <Redirect to= {'/home'}/>}/>
             <Route  path="/home" render={() => <Home />}/>
             <Route  path="/signup" render={() => <SingUp />}/>
+            <Route  path="/pin" render={() => <Pin />}/>
             <Route  path="/signup-form" render={() => <Form />}/>
             <Route  path="/lyftmap" render={() => <LyftMap />}/>
 

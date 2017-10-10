@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './SingUp';
+import SingUp from './SingUp';
 //import Form from './form';
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<App/>, document.getElementById('root'));
+ReactDOM.render(<SingUp/>, document.getElementById('root'));
 registerServiceWorker();

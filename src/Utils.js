@@ -50,3 +50,5 @@ class Utils {
       return newObj;
    }
 }
+
+export default Utils;

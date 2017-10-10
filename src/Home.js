@@ -8,7 +8,7 @@ import {
 } from 'react-router-dom';
 
 import logo from './img/logo-white.png';
-import './App.css';
+import './Home.css';
 
 class Home extends Component {
     render() {
@@ -17,7 +17,7 @@ class Home extends Component {
                 <section id="index">
                     <div className="contain">
                         <div id="logo">
-                            <img className="logo-white img-responsive" src={logo} alt="" />
+                            <img className="img-responsive" src={logo} alt="" />
                         </div>
                         <div className="row" id="botones">
                             <div className="col-xs-6 col-sm-6">

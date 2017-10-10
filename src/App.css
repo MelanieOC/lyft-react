@@ -2,56 +2,6 @@ input{
 	font-size: 120%;
 }
 
-#index{
-	background-image: url('./img/fondo.jpg');
-	background-size: cover;
-	background-position: center;
-	background-repeat: no-repeat;
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-}
-.contain{
-	display: flex;
-	justify-content: center;
-}
-#botones{
-	position: absolute;
-	bottom: 5%;
-	width: 90%;
-	margin: 2px auto;
-}
-#botones button{
-	font-size: 150%;
-	width: 100%;
-	color: white;
-}
-#log-in {
-	border: 1px solid white;
-	background: transparent;
-}
-
-#sign-up {
-	background: -webkit-linear-gradient(90deg, rgb(53, 35, 132), rgb(255, 0, 191));
-	background: linear-gradient(90deg, rgb(53, 35, 132), rgb(255, 0, 191));
-	border: 1px solid transparent;
-	border-left-color: rgb(53, 35, 132);
-	border-right-color: rgb(255, 0, 191);
-	font-size: 150%;
-	color: white;
-	position: absolute;
-	width: 90%;
-	margin: 2px auto;
-	text-align: center;
-}
-#logo{
-	position: absolute;
-	top: 10%;
-	width: 110px;
- 	height: 80px;
-}
 .input-close .dropdown{
 	margin: 0 auto;
 	width: 80%;

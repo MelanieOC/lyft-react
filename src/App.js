@@ -21,11 +21,6 @@ const NotFound = (props) => {
 	);
 }
 
-/**
- * <div>
-        <LyftMap/>
-      </div>
- */
 class App extends Component {
   render() {
     return (
@@ -38,7 +33,7 @@ class App extends Component {
             <Route  path="/signup" render={() => <SingUp />}/>
             <Route  path="/signup-form" render={() => <Form />}/>
             <Route  path="/lyftmap" render={() => <LyftMap />}/>
-            
+
             <Route component={NotFound}/>
           </Switch>
         </div>

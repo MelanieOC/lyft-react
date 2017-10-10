@@ -37,7 +37,7 @@ class App extends Component {
             <Route  path="/signup-form" render={() => <Form model={model}/>}/>
             <Route  path="/lyftmap" render={() => <LyftMap model={model}/>}/>
 
-            <Route component={NotFound}/>
+            <Route render={() => <Redirect to= {'/home'}/>}/>
           </Switch>
         </div>
       </BrowserRouter>

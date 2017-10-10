@@ -1,0 +1,107 @@
+#mapa{
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+}
+
+#mapa_header{
+	z-index: 2;
+	position: absolute;
+	top: 2%;
+	width: 100%;
+	display: flex;
+	justify-content: space-around;
+}
+
+#mapa_header img{
+	width: 80px;
+  	height: 60px;
+}
+
+#mapa_header #usuario_logo, #usuario_logo2{
+	width: 70px;
+  	height: 70px;
+  	cursor: pointer;
+}
+
+#menu_mapa{
+	position: absolute;
+	bottom: 5%;
+	width: 100%;
+}
+
+#menu_mapa .form-control, #menu_mapa button{
+	width: 100%;
+	margin: 5px 0;
+}
+
+#ruta, #solicitar{
+	background-color: #FF00BF;
+	color: white;
+	font-weight: bold;
+}
+
+.ocultar, #origen, #solicitar{
+	display: none;
+}
+
+#origen{
+	width: 100%;
+}
+
+#menu_mapa .precio{
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	margin: 0;
+	padding: 2px auto;
+}
+
+.precio img{
+	width: 80px;
+  	height: 60px;
+	display: inline-block;
+}
+
+.precio span{
+	display: inline-block;
+	margin-left: 15px;
+}
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    background-color: #E6E6E6;
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidenav div{
+	padding: 2px 10px;
+    font-size: 15px;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+#myModal{
+	z-index: 1000;
+}
+
+.modal-open .modal-backdrop{
+	z-index: 10;
+}

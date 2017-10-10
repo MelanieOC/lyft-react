@@ -21,29 +21,7 @@ input{
 	color: black;
 }
 
-.input-close .row div{
-	padding: 0;
-}
-
-.input-close input{
-	width: 90%;
-	border:none;
-	outline: none;
-}
-.input-close{
-	border: 1px solid silver;
-	border-radius: 5px;
-	padding: 10px;
-	margin:10px 0;
-}
-
 #boton_telefono{
 	text-decoration: none;
 	color: white;
-}
-
-.error{
-	color: red;
-	font-size: 80%;
-	display: none;
 }

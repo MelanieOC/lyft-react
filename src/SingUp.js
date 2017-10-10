@@ -8,7 +8,7 @@ import {
 	Redirect
 } from 'react-router-dom';
 
-import './Forms.css';
+import './signUp.css';
 import Utils from './Utils';
 import flag_chile from './img/flag_chile.png';
 import flag_peru from './img/flag_peru.png';

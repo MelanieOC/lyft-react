@@ -2,41 +2,6 @@ input{
 	font-size: 120%;
 }
 
-.input-close .dropdown{
-	margin: 0 auto;
-	width: 80%;
-}
-.dropdown img{
-	width: 60%;
-	display: inline-block;
-}
-
-.regresar{
-	position: absolute;
-	top: 2%;
-	left: 5%;
-}
-
-.regresar a{
-	color: black;
-}
-
-.input-close .row div{
-	padding: 0;
-}
-
-.input-close input{
-	width: 90%;
-	border:none;
-	outline: none;
-}
-.input-close{
-	border: 1px solid silver;
-	border-radius: 5px;
-	padding: 10px;
-	margin:10px 0;
-}
-
 .next button{
 	border: none;
 	width: 100%;
@@ -56,19 +21,9 @@ input{
 	text-align: center;
 }
 
-#boton_telefono{
-	text-decoration: none;
-	color: white;
-}
-
 #boton_usuario{
 	text-decoration: none;
 	color: white;
-}
-.error{
-	color: red;
-	font-size: 80%;
-	display: none;
 }
 
 .next .disabled{

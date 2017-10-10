@@ -58,7 +58,7 @@ class Pin extends Component {
 				</section>
 
 				<section className="next">
-					<NavLink to={"/signup-form"} className="btn-lg" id="boton_usuario">Next</NavLink>
+					<NavLink to={"/signup-form"} className="btn btn-lg btn-next" >Next</NavLink>
 				</section>
 			</div>
 		);

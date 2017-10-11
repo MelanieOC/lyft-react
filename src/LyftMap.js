@@ -81,7 +81,6 @@ const MapSetpickup = ({ model }) => {
 	}
 	return (
 		<div>
-			<div id="origen" className="form-control"></div>
 			<ReactGoogleAutocomplete
 				onPlaceSelected={(place) => {
 					model.setTarget(place);

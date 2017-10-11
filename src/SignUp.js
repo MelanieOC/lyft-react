@@ -13,25 +13,6 @@ import flag_chile from './img/flag_chile.png';
 import flag_peru from './img/flag_peru.png';
 import flag_mexico from './img/flag_mexico.png';
 
-class Header extends Component{
-  render(){
-    return(
-      <div>
-        <header className="text-center">
-          <div className="prevPage">
-            <NavLink to="/home">
-              <i className="fa fa-angle-left fa-3x" aria-hidden="true"></i>
-            </NavLink>
-          </div>
-          <h1>Sign up</h1>
-          <h4>Join now for free ride credit</h4>
-          <hr />
-        </header>
-      </div>
-    )
-  }
-}
-
 class SignUp extends Component {
   constructor(props) {
     super(props);
@@ -72,6 +53,23 @@ class SignUp extends Component {
       });
     }
 
+    const Header = () => {
+			return (
+				<div>
+					<header className="text-center">
+            <div className="prevPage">
+              <NavLink to="/home">
+                <i className="fa fa-angle-left fa-3x" aria-hidden="true"></i>
+              </NavLink>
+            </div>
+            <h1>Sign up</h1>
+            <h4>Join now for free ride credit</h4>
+            <hr />
+          </header>
+				</div>
+			)
+    }
+    
     const NextBtn = () => {
       return(
         <div>
@@ -85,7 +83,7 @@ class SignUp extends Component {
 
     return (
       <div>
-        <Header />
+        <div> {Header()} </div>
         <section className="container">
           <div className="input-close container">
             <div className="row">
@@ -123,9 +121,7 @@ class SignUp extends Component {
             </div>
           }
         </section>
-        <div>
-          {NextBtn()}
-        </div>
+        <div> {NextBtn()} </div>
       </div>
     );
   }

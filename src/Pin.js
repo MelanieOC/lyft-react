@@ -21,39 +21,36 @@ class Pin extends Component {
 		}
 	}
 
-	codeGenerator(){
-		let pin = Math.floor(Math.random() * (999 - 100));
-		this.setState({
-			newPin : pin
-		})
-		return pin;
-	}
-
-	onInputChange = (e) =>{
+	onInputChange = (e) => {
 		this.currentPIN.push(e.target.value);
 		console.log(this.currentPIN);
 		return this.currentPIN;
 	}
-	getPinCode(){	
-		if(this.currentPIN.length === 3){
+	getPinCode() {
+		if (this.currentPIN.length === 3) {
 			this.setState({
-				checked:true
+				checked: true
 			})
-		}else{
+		} else {
 			this.setState({
 				checked: false
 			})
 		}
 	}
 
-	checkPinCode(){
-		this.currentPIN = this.currentPIN.join('');
+	checkPinCode() {
+		this.currentPIN = parseInt(this.currentPIN.join(''));
 		console.log(this.currentPIN);
-		if(this.currentPIN === this.state.pin){
+		if (this.currentPIN === 523) {
 			this.setState({
-				next:true,
-				checked:true
+				next: true,
+				checked: true
 			})
+		}else{
+			this.setState({
+				checked: false,
+				next: false
+			});
 		}
 	}
 	render() {
@@ -63,42 +60,42 @@ class Pin extends Component {
 				next: true
 			});
 		}
-		
+
 		const Header = () => {
-			return(
+			return (
 				<div>
-				  	<header className="text-center">
-					  <div className="prevPage">
-						  <NavLink to="/signup">
-							  <i className="fa fa-angle-left fa-3x" aria-hidden="true"></i>
-						  </NavLink>
-					  </div>
-					  <h3>Verify phone number</h3>
-					  <h5>Join now for free ride credit</h5>
-					  <hr />
-				  </header>
+					<header className="text-center">
+						<div className="prevPage">
+							<NavLink to="/signup">
+								<i className="fa fa-angle-left fa-3x" aria-hidden="true"></i>
+							</NavLink>
+						</div>
+						<h3>Verify phone number</h3>
+						<h5>Join now for free ride credit</h5>
+						<hr />
+					</header>
 				</div>
 			)
 		}
+
 		const NextBtn = () => {
-			return(
-			  <div>
-				<section className="next">
-					{this.state.next && <NavLink to={"/signup-form"} className="btn btn-lg btn-next" > Next</NavLink>}
-					{!this.state.next && <button className={this.state.checked ? "btn-lg btn-next" : "btn-lg btn-next disabled"} disabled={!this.state.checked} onClick={(e) => { this.checkPinCode(e) }}>Next</button>}
-				</section>
-			  </div>
+			return (
+				<div>
+					<section className="next">
+						{this.state.next && <NavLink to={"/signup-form"} className="btn btn-lg btn-next" > Next</NavLink>}
+						{!this.state.next && <button className={this.state.checked ? "btn-lg btn-next" : "btn-lg btn-next disabled"} disabled={!this.state.checked} onClick={(e) => { this.checkPinCode(e) }}>Next</button>}
+					</section>
+				</div>
 			)
 		}
 
 		return (
 			<div>
 				<div> {Header()} </div>
-
 				<section className="container">
 					<div className="alert text-center">
-              			Your PIN number is: <span id="cod-lab"> LAB - {()=>{this.codeGenerator()}}</span>
-            		</div>
+						Your PIN number is: <span id="cod-lab"> LAB - 523</span>
+					</div>
 
 					<div className="row">
 						<form className='form-inline'>
@@ -109,16 +106,16 @@ class Pin extends Component {
 							</div>
 							<div className='form-group'>
 								<div className="col-sm3 col-xs-3 text-center">
-									<input type="text" className="text-center randomCode" maxLength="1" 
-									onKeyUp={(e) => { this.onInputChange(e) }}/>
+									<input type="text" className="text-center randomCode" maxLength="1"
+										onKeyUp={(e) => { this.onInputChange(e) }} />
 								</div>
 								<div className="col-sm3 col-xs-3 text-center">
-									<input type="text" className="text-center randomCode" maxLength="1" 
-									onKeyUp={(e) => { this.onInputChange(e) }}/>
+									<input type="text" className="text-center randomCode" maxLength="1"
+										onKeyUp={(e) => { this.onInputChange(e) }} />
 								</div>
 								<div className="col-sm3 col-xs-3 text-center">
-									<input type="text" className="text-center randomCode" maxLength="1" 
-									onKeyUp={(e) => { this.onInputChange(e) }}  onBlur={()=> {this.getPinCode()}}/>
+									<input type="text" className="text-center randomCode" maxLength="1"
+										onKeyUp={(e) => { this.onInputChange(e) }} onBlur={() => { this.getPinCode() }} />
 								</div>
 							</div>
 						</form>

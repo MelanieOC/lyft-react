@@ -22,7 +22,6 @@ class SignUp extends Component {
       { country: 'Mexico', src: flag_mexico, code: '+52', length: 10 }];
     this.state = {
       currentFlag: 0,
-      showPin: false,
       checked: false,
       next: false
     }
@@ -38,7 +37,8 @@ class SignUp extends Component {
     const onInputChange = (e) => {
       if (e.target.value.length === this.flags[this.state.currentFlag].length) {
         this.setState({
-          checked: true
+          checked: true,
+          next: true
         });
       } else {
         this.setState({
@@ -46,13 +46,7 @@ class SignUp extends Component {
         });
       }
     }
-    const showPin = () => {
-      this.setState({
-        showPin: true,
-        next: true
-      });
-    }
-
+  
     const Header = () => {
 			return (
 				<div>
@@ -75,7 +69,7 @@ class SignUp extends Component {
         <div>
           <section className="next">
             {this.state.next && <NavLink to={"/pin"} className="btn btn-lg btn-next" > Next</NavLink>}
-            {!this.state.next && <button className={this.state.checked ? "btn-lg btn-next" : "btn-lg btn-next disabled"} disabled={!this.state.checked} onClick={showPin}>Next</button>}
+            {!this.state.next && <button className={this.state.checked ? "btn-lg btn-next" : "btn-lg btn-next disabled"} disabled={!this.state.checked} >Next</button>}
           </section>
         </div>
       )
@@ -115,11 +109,6 @@ class SignUp extends Component {
               <p>We'll send you a text to verify your phone</p>
             </div>
           </div>
-          {this.state.showPin &&
-            <div className=" alert alert-warning text-center">
-              Your PIN number is: <span id="cod-lab"> LAB - {Math.floor(Math.random() * (999 - 100))}</span>
-            </div>
-          }
         </section>
         <div> {NextBtn()} </div>
       </div>

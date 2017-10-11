@@ -43,8 +43,7 @@ class Pin extends Component {
 		console.log(this.currentPIN);
 		if (this.currentPIN === 523) {
 			this.setState({
-				next: true,
-				checked: true
+				next: true
 			})
 		}else{
 			this.setState({
@@ -54,13 +53,6 @@ class Pin extends Component {
 		}
 	}
 	render() {
-		const showPin = () => {
-			this.setState({
-				showPin: true,
-				next: true
-			});
-		}
-
 		const Header = () => {
 			return (
 				<div>

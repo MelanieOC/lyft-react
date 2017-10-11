@@ -86,7 +86,7 @@ class Pin extends Component {
 								</div>
 								<div className="col-sm3 col-xs-3 text-center">
 									<input type="text" className="text-center randomCode" maxLength="1" 
-									onKeyUp={(e) => { this.onInputChange(e) }} />
+									onKeyUp={(e) => { this.onInputChange(e) }}  onBlur={()=> {this.getPinCode()}}/>
 								</div>
 							</div>
 						</form>
@@ -99,7 +99,7 @@ class Pin extends Component {
 
 				<section className="next">
 					{this.state.next && <NavLink to={"/signup-form"} className="btn btn-lg btn-next" > Next</NavLink>}
-					{!this.state.next && <button className={this.state.checked ? "btn-lg btn-next" : "btn-lg btn-next disabled"} disabled={!this.state.checked} onClick={(e) => { this.onInputChange(e) }}>Next</button>}
+					{!this.state.next && <button className={this.state.checked ? "btn-lg btn-next" : "btn-lg btn-next disabled"} disabled={!this.state.checked} onClick={(e) => { this.checktPinCode(e) }}>Next</button>}
 				</section>
 			</div>
 		);

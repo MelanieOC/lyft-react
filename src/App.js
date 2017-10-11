@@ -14,23 +14,12 @@ import Home from "./Home.js";
 import SingUp from "./SingUp.js";
 import Pin from "./Pin.js";
 import Form from "./form.js";
-//import LyftMap from "./Map.js";
 import LyftMap from './LyftMap';
-
-const NotFound = (props) => {
-  return (
-    <div><h2> Error 404! </h2></div>
-  );
-}
 
 class App extends Component {
   render() {
     const { model } = this.props;
     return (
-      <div>
-        <LyftMap model={model} />
-      </div>
-      /*
       <BrowserRouter>
         <div>
           <Switch>
@@ -45,7 +34,7 @@ class App extends Component {
             <Route render={() => <Redirect to= {'/home'}/>}/>
           </Switch>
         </div>
-      </BrowserRouter>*/
+      </BrowserRouter>
     );
   }
 }

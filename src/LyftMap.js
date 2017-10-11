@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './img/logo-pink.png';
 import usuario from './img/usuario.png';
+import carro from './img/carro.png';
 import './App.css';
 import './map.css';
 import GoogleMaps from './GoogleMaps';
@@ -13,55 +14,106 @@ import {
 	NavLink,
 	Redirect
 } from 'react-router-dom'
+class HeaderMap extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			show: false
+		}
+	}
 
-const HeaderMap = ({ model }) => {
+	render() {
+		const { model } = this.props;
+		const open = () => {
+			this.setState({
+				show: true
+			})
+		}
+		const close = () => {
+			this.setState({
+				show: false
+			})
+		}
+		return (
+			<header id="mapa_header">
+				<img className="img-responsive" id='usuario_logo' onClick={open} src={usuario} alt="" />
+				<img className="img-responsive" src={logo} alt="" />
+				<span className="fa-stack fa-lg fa-2x">
+					<i className="fa fa-circle fa-stack-2x"></i>
+					<i className="fa fa-gift fa-stack-1x fa-inverse"></i>
+				</span>
+				<div id="mySidenav" className="sidenav" style={{ width: this.state.show ? '250px' : 0 }}>
+					<a href="javascript:void(0)" className="closebtn" onClick={close}>&times;</a>
+					<div id="datos_usuario">
+
+					</div>
+				</div>
+			</header>
+		);
+	}
+}
+const MapPrice = ({ model }) => {
 	return (
-		<header id="mapa_header">
-			<img className="img-responsive" id='usuario_logo' src={usuario} alt="" />
-			<img className="img-responsive" src={logo} alt="" />
-			<span className="fa-stack fa-lg fa-2x">
-				<i className="fa fa-circle fa-stack-2x"></i>
-				<i className="fa fa-gift fa-stack-1x fa-inverse"></i>
-			</span>
-			<div id="mySidenav" className="sidenav">
-				<a href="javascript:void(0)" className="closebtn">&times;</a>
-				<div id="datos_usuario">
+		<div>
+			<div>
+				<div className="well precio">
+					<img src={carro} alt="carro" />
+					<span><h4>Lyft</h4><p>Fast ride 4 seats</p></span>
+				</div>
+				<div className="well precio">
+					<div className="text-center">
+						<p id="precio">{model.precio}</p>
+						<p>Price stimated</p>
+					</div>
+				</div>
+
+			</div>
+			<button type="button" className="btn" id="solicitar" data-toggle="modal" data-target="#myModal">Request Lyft</button>
+			<div id="myModal" class="modal fade" role="dialog">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title text-center">Tu lyft está en camino</h4>
+						</div>
+						<div class="modal-body">
+							<NavLink to={"/lyftmap"} class="btn" id="otro_viaje">Otro viaje</NavLink>
+						</div>
+					</div>
 				</div>
 			</div>
-		</header>
+		</div>
 	);
 }
-
-const MapForm = ({model}) => {
+const MapSetpickup = ({ model }) => {
 	const onPathBntClick = () => {
 		model.setIsRouting();
 	}
 	return (
+		<div>
+			<div id="origen" className="form-control"></div>
+			<ReactGoogleAutocomplete
+				onPlaceSelected={(place) => {
+					model.setTarget(place);
+				}}
+				componentRestrictions={{ country: "pe" }}
+				id="destino" className="form-control"
+			/>
+			<button type="button" className="btn" id="ruta" onClick={onPathBntClick}>Set pickup</button>
+		</div>
+	);
+}
+
+const MapForm = ({ model }) => {
+	return (
 		<div className="container">
 			<div className="row">
 				<div id="menu_mapa" className="col-sm-12 col-xs-12">
-					<div className="ocultar">
-						<div className="well precio">
-							<img src="assets/img/carro.png" alt="carro" />
-							<span><h4>Lyft</h4><p>Fast ride 4 seats</p></span>
-						</div>
-						<div className="well precio">
-							<div className="text-center">
-								<p id="precio"></p>
-								<p>Price stimated</p>
-							</div>
-						</div>
-					</div>
-					<div id="origen" className="form-control"></div>
-					<ReactGoogleAutocomplete
-						onPlaceSelected={(place) => {
-							model.setTarget(place);
-						}}
-						componentRestrictions={{ country: "pe" }}
-						id="destino" className="form-control"
-					/>
-					<button type="button" className="btn" onClick={onPathBntClick}>Set pickup</button>
-					<button type="button" className="btn" id="solicitar" data-toggle="modal" data-target="#myModal">Request Lyft</button>
+					{model.isRouting ?
+						<MapPrice model={model} /> :
+						<MapSetpickup model={model} />
+
+					}
 				</div>
 			</div>
 		</div>

@@ -16,11 +16,7 @@ class LyftModel {
 		this.activeProperty = data.properties[0]
 		this.isRouting = false;
 		this.targetPlace = null;
-	}
-	setUserInfo (info) {
-		this.userInfo = info;
-		//Utils.store('lyft', this.userInfo);
-		this.notify();
+		this.precio=null;
 	}
 
 	subscribe (render) {
@@ -30,13 +26,19 @@ class LyftModel {
 		this.activeProperty = property;
 		this.notify();
 	}
-
+	getPrice(price){
+		this.precio=price;
+		this.notify();
+	}
 	setTarget (targetPlace) {
 		this.targetPlace  = targetPlace;
 		this.notify();
 	}
 
 	setIsRouting ( ) {
+		if(this.isRouting){
+			this.isRouting = false;
+		}
 		this.isRouting = true;
 		this.notify();
 	}

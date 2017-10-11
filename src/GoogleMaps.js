@@ -21,7 +21,7 @@ const loadMaps = (cb) => {
 		};
 		this.autocompleteDestino = null;
 	}
-
+	
 	componentWillMount() {
 		if (!window.google) {
 			loadMaps(() => {
@@ -175,6 +175,7 @@ const loadMaps = (cb) => {
 	}
 
 	drawPath(directionsService, directionsDisplay, origin, destination) {
+		const {model}=this.props;
 		if(destination != "" && origin != "") {
 			directionsService.route({
 					origin: origin,
@@ -184,6 +185,8 @@ const loadMaps = (cb) => {
 				function(response, status) {
 					if (status === "OK") {
 						directionsDisplay.setDirections(response);
+						let precio = response.routes[0].overview_path.length / 10  + 'USD';
+						model.getPrice(precio);
 					} else {
 						alert("No ingresaste un origen y un destino validos");
 					}

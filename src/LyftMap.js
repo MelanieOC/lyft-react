@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import GoogleMaps from './GoogleMap';
+import GoogleMaps from './GoogleMaps';
 import ReactGoogleAutocomplete from './ReactGoogleAutocomplete';
  import {
 	BrowserRouter,
@@ -60,9 +60,8 @@ const LyftMap = ({model}) => {
 				<label htmlFor="destino"> Destino </label>
 				<ReactGoogleAutocomplete
 					onPlaceSelected={(place) => {
-
-						console.log (place);
 						model.setTarget (place);
+						console.log (model.targetPlace);
 
 					}}
 					componentRestrictions={{country: "pe"}}

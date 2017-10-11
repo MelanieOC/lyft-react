@@ -29,8 +29,8 @@ export default  class ReactGoogleAutocomplete extends React.Component {
 		if (componentRestrictions) {
 			config.componentRestrictions = componentRestrictions;
 		}
-		//console.log('window.google.maps', window.google.maps);
-		//console.log('window.google.maps.places', window.google.maps.places);
+		console.log('window.google.maps', window.google.maps);
+		console.log('window.google.maps.places', window.google.maps.places);
 
 		this.autocomplete = new window.google.maps.places.Autocomplete(this.refs.input, config);
 

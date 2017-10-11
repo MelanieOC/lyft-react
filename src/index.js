@@ -13,4 +13,7 @@ const render = () => {
 model.subscribe(render);
 render();
 
+//ReactDOM.render(<App/>, document.getElementById('root'));
 registerServiceWorker();
+
+

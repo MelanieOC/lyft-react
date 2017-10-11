@@ -14,7 +14,8 @@ import Home from "./Home.js";
 import SingUp from "./SingUp.js";
 import Pin from "./Pin.js";
 import Form from "./form.js";
-import LyftMap from "./LyftMap.js";
+import LyftMap from "./Map.js";
+//import LyftMap from './LyftMap';
 
 const NotFound = (props) => {
   return (
@@ -29,7 +30,8 @@ class App extends Component {
       <div>
         <LyftMap model={model} />
       </div>
-      /*<BrowserRouter>
+      /*
+      <BrowserRouter>
         <div>
           <Switch>
             <Route exact path="/"

@@ -4,6 +4,7 @@ import usuario from './img/usuario.png';
 import './App.css';
 import './map.css';
 import Utils from './Utils.js';
+import ReactGoogleAutocomplete from './ReactGoogleAutocomplete';
 //https://maps.googleapis.com/maps/api/js?key=AIzaSyCl5FxNRuSN9tRMoZFJsH_q511Zt6DBVH4&libraries=places
 //AIzaSyCl5FxNRuSN9tRMoZFJsH_q511Zt6DBVH4
 
@@ -12,37 +13,80 @@ import {
   withGoogleMap,
   GoogleMap,
   Marker,
+  InfoWindow,
   DirectionsRenderer
 } from "react-google-maps";
 
-
-const MyMapComponent = withScriptjs(withGoogleMap(props =>
+const MyMapComponent = withGoogleMap(props =>
   <GoogleMap
     defaultZoom={15}
     center={props.center}
   >
-    <Marker
-      position={props.center}
-    />
+    {props.center &&
+      <Marker position={props.center}>
+        <InfoWindow><div>Estas aquí</div></InfoWindow>
+      </Marker>
+    }
+    {props.directions && <DirectionsRenderer directions={props.directions} />}
   </GoogleMap>
-));
+);
 
+class Ruta extends Component {
+  constructor(props) {
+    super(props);
+    this.inputValue = null;
+    this.state = {
+      center: { lat: 41.8525800, lng: -87.6514100 },
+      bounds: null,
+      origen: this.props.origen,
+      destino:this.props.destino
+    }
+  }
+  componentDidMount() {
+    const DirectionsService = new window.google.maps.DirectionsService();
+
+    DirectionsService.route({
+      origin: this.state.origen,
+      destination: this.state.destino,
+      travelMode: window.google.maps.TravelMode.DRIVING,
+    }, (result, status) => {
+      if (status === window.google.maps.DirectionsStatus.OK) {
+        this.setState({
+          directions: result,
+        });
+      } else {
+        console.error(`error fetching directions ${result}`);
+      }
+    });
+  }
+  render() {
+    return (
+      <div>
+        <MyMapComponent
+          loadingElement={<div style={{ height: `100%` }} />}
+          containerElement={<div style={{ position: 'absolute', height: `100%`, width: '100%' }} />}
+          mapElement={<div style={{ height: `100%` }} />}
+          directions={this.state.directions}
+        />
+      </div>
+    );
+  }
+}
 class LyftMap extends Component {
   constructor(props) {
     super(props);
     this.inputValue = null;
     this.state = {
-      center: { lat: -16.3988900, lng: -71.5350000 },
-      bounds: null
+      center: { lat: 41.8507300, lng: -87.6512600 },
+      mostrarRuta: false,
+      place: null
     }
   }
   componentDidMount() {
     if (window.navigator.geolocation) {
       window.navigator.geolocation.getCurrentPosition((posicion) => {
-
         const latitud = posicion.coords.latitude;
         const longitud = posicion.coords.longitude;
-
         this.setState({
           center: { lat: latitud, lng: longitud }
         })
@@ -51,10 +95,14 @@ class LyftMap extends Component {
       });
     }
   }
-  guardar() {
-    console.log('hola');
-  }
+  
   render() {
+    const { model } = this.props;
+    const changePlace=()=>{
+      this.setState({
+        place: model.targetPlace
+      })
+    }
     return (
       <div>
         <header id="mapa_header">
@@ -71,13 +119,15 @@ class LyftMap extends Component {
             </div>
           </div>
         </header>
-        <MyMapComponent
-          googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCl5FxNRuSN9tRMoZFJsH_q511Zt6DBVH4&v=3.exp&libraries=geometry,drawing,places"
-          loadingElement={<div style={{ height: `100%` }} />}
-          containerElement={<div style={{ position: 'absolute', height: `100%`, width: '100%' }} />}
-          mapElement={<div style={{ height: `100%` }} />}
-          center={this.state.center}
-        />
+        {this.state.place && <Ruta origen={this.state.center} destino={this.state.place.geometry.location} />}
+        {!this.state.place &&
+          <MyMapComponent
+            loadingElement={<div style={{ height: `100%` }} />}
+            containerElement={<div style={{ position: 'absolute', height: `100%`, width: '100%' }} />}
+            mapElement={<div style={{ height: `100%` }} />}
+            center={this.state.center}
+          />
+        }
         <div className="container">
           <div className="row">
             <div id="menu_mapa" className="col-sm-12 col-xs-12">
@@ -94,7 +144,16 @@ class LyftMap extends Component {
                 </div>
               </div>
               <div id="origen" className="form-control"></div>
-              <input type="text" id="destino" className="form-control" onChange={e => this.inputValue = e.target.value} />
+              <ReactGoogleAutocomplete
+                onPlaceSelected={(place) => {
+                  console.log(place);
+                  model.setTarget(place);
+                  changePlace();
+                  console.log(model.targetPlace.geometry.location);
+                }}
+                componentRestrictions={{ country: "pe" }}
+                id="destino" className="form-control"
+              />
               <button type="button" className="btn" id="ruta" onClick={() => this.guardar()}>Set pickup</button>
               <button type="button" className="btn" id="solicitar" data-toggle="modal" data-target="#myModal">Request Lyft</button>
             </div>

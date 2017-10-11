@@ -17,11 +17,15 @@ class Pin extends Component {
 			showPin: false,
 			checked: false,
 			next: false,
+			newPin: undefined
 		}
 	}
 
 	codeGenerator(){
 		let pin = Math.floor(Math.random() * (999 - 100));
+		this.setState({
+			newPin : pin
+		})
 		return pin;
 	}
 
@@ -30,8 +34,7 @@ class Pin extends Component {
 		console.log(this.currentPIN);
 		return this.currentPIN;
 	}
-	getPinCode(){
-		console.log(this.currentPIN);
+	getPinCode(){	
 		if(this.currentPIN.length === 3){
 			this.setState({
 				checked:true
@@ -39,6 +42,17 @@ class Pin extends Component {
 		}else{
 			this.setState({
 				checked: false
+			})
+		}
+	}
+
+	checkPinCode(){
+		this.currentPIN = this.currentPIN.join('');
+		console.log(this.currentPIN);
+		if(this.currentPIN === this.state.pin){
+			this.setState({
+				next:true,
+				checked:true
 			})
 		}
 	}
@@ -65,7 +79,7 @@ class Pin extends Component {
 
 				<section className="container">
 					<div className="alert text-center">
-              			Your PIN number is: <span id="cod-lab"> LAB - {Math.floor(Math.random() * (999 - 100))}</span>
+              			Your PIN number is: <span id="cod-lab"> LAB - {()=>{this.codeGenerator()}}</span>
             		</div>
 
 					<div className="row">
@@ -99,7 +113,7 @@ class Pin extends Component {
 
 				<section className="next">
 					{this.state.next && <NavLink to={"/signup-form"} className="btn btn-lg btn-next" > Next</NavLink>}
-					{!this.state.next && <button className={this.state.checked ? "btn-lg btn-next" : "btn-lg btn-next disabled"} disabled={!this.state.checked} onClick={(e) => { this.checktPinCode(e) }}>Next</button>}
+					{!this.state.next && <button className={this.state.checked ? "btn-lg btn-next" : "btn-lg btn-next disabled"} disabled={!this.state.checked} onClick={(e) => { this.checkPinCode(e) }}>Next</button>}
 				</section>
 			</div>
 		);

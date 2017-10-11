@@ -14,8 +14,8 @@ import Home from "./Home.js";
 import SingUp from "./SingUp.js";
 import Pin from "./Pin.js";
 import Form from "./form.js";
-import LyftMap from "./Map.js";
-//import LyftMap from './LyftMap';
+//import LyftMap from "./Map.js";
+import LyftMap from './LyftMap';
 
 const NotFound = (props) => {
   return (

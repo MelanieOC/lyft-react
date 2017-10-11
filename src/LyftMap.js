@@ -1,7 +1,12 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import logo from './img/logo-pink.png';
+import usuario from './img/usuario.png';
+import './App.css';
+import './map.css';
 import GoogleMaps from './GoogleMaps';
 import ReactGoogleAutocomplete from './ReactGoogleAutocomplete';
- import {
+
+import {
 	BrowserRouter,
 	Route,
 	Switch,
@@ -9,8 +14,60 @@ import ReactGoogleAutocomplete from './ReactGoogleAutocomplete';
 	Redirect
 } from 'react-router-dom'
 
+const HeaderMap = ({ model }) => {
+	return (
+		<header id="mapa_header">
+			<img className="img-responsive" id='usuario_logo' src={usuario} alt="" />
+			<img className="img-responsive" src={logo} alt="" />
+			<span className="fa-stack fa-lg fa-2x">
+				<i className="fa fa-circle fa-stack-2x"></i>
+				<i className="fa fa-gift fa-stack-1x fa-inverse"></i>
+			</span>
+			<div id="mySidenav" className="sidenav">
+				<a href="javascript:void(0)" className="closebtn">&times;</a>
+				<div id="datos_usuario">
+				</div>
+			</div>
+		</header>
+	);
+}
 
-const LyftMap = ({model}) => {
+const MapForm = ({model}) => {
+	const onPathBntClick = () => {
+		model.setIsRouting();
+	}
+	return (
+		<div className="container">
+			<div className="row">
+				<div id="menu_mapa" className="col-sm-12 col-xs-12">
+					<div className="ocultar">
+						<div className="well precio">
+							<img src="assets/img/carro.png" alt="carro" />
+							<span><h4>Lyft</h4><p>Fast ride 4 seats</p></span>
+						</div>
+						<div className="well precio">
+							<div className="text-center">
+								<p id="precio"></p>
+								<p>Price stimated</p>
+							</div>
+						</div>
+					</div>
+					<div id="origen" className="form-control"></div>
+					<ReactGoogleAutocomplete
+						onPlaceSelected={(place) => {
+							model.setTarget(place);
+						}}
+						componentRestrictions={{ country: "pe" }}
+						id="destino" className="form-control"
+					/>
+					<button type="button" className="btn" onClick={onPathBntClick}>Set pickup</button>
+					<button type="button" className="btn" id="solicitar" data-toggle="modal" data-target="#myModal">Request Lyft</button>
+				</div>
+			</div>
+		</div>
+	);
+}
+const LyftMap = ({ model }) => {
 
 	const state = {
 		properties: model.properties,
@@ -31,51 +88,21 @@ const LyftMap = ({model}) => {
 	const propertiesList = isFiltering ? filteredProperties : properties;
 
 	const setActiveProperty = (property, scroll) => {
-		//this.setState({
-		//	activeProperty: property,
-		//});
 		model.setActiveProperty(property);
 
-		const {index} = property;
-
-		// Scroll to active property
+		const { index } = property;
 		if (scroll) {
 			const target = `#card-${index}`;
-			//jump(target, {
-			//	duration: 800,
-			//	easing: easeInOutCubic,
-			//});
 		}
 	}
-	const onPathBntClick = () => {
-		model.setIsRouting();
-	}
+
 
 	return (<div>
 
-		<h2>LyftMap </h2>
+		<HeaderMap />
 
-		<div className="col-md-3 col-sm-3">
-			<div className="form-group">
-				<label htmlFor="destino"> Destino </label>
-				<ReactGoogleAutocomplete
-					onPlaceSelected={(place) => {
-						model.setTarget (place);
-						console.log (model.targetPlace);
-
-					}}
-					componentRestrictions={{country: "pe"}}
-				/>
-			</div>
-		</div>
-		<div className="col-md-3 col-sm-3">
-			<button id="ruta" className="btn btn-success" onClick={onPathBntClick}>
-				<i className="fa fa-bicycle" aria-hidden="true"></i>
-				Ruta
-			</button>
-		</div>
 		<GoogleMaps
-			model = {model}
+			model={model}
 			properties={properties}
 			activeProperty={activeProperty}
 			setActiveProperty={setActiveProperty}
@@ -84,7 +111,7 @@ const LyftMap = ({model}) => {
 			isRouting={isRouting}
 		/>
 
-
+		<MapForm model={model} />
 
 	</div>);
 }

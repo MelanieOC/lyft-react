@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './js/App';
+import App from './App';
 
 import registerServiceWorker from './registerServiceWorker';
-import LyftModel from './js/LyftModel';
+import LyftModel from './LyftModel';
 
 const model = new LyftModel();
 const render = () => {

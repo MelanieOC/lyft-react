@@ -14,14 +14,14 @@
 	justify-content: center;
 }
 
-#botones{
+#buttons{
 	position: absolute;
 	bottom: 5%;
 	width: 90%;
 	margin: 2px auto;
 }
 
-#botones button{
+#buttons button{
 	font-size: 150%;
 	width: 100%;
 	color: white;

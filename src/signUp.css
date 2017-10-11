@@ -1,0 +1,12 @@
+input{
+	font-size: 120%;
+}
+
+.input-close .dropdown{
+	margin: 0 auto;
+	width: 80%;
+}
+.dropdown img{
+	width: 60%;
+	display: inline-block;
+}

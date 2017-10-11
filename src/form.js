@@ -7,7 +7,6 @@ import {
 	Redirect
 } from 'react-router-dom';
 
-import logo from './logo.svg';
 import './Forms.css';
 
 
@@ -16,8 +15,8 @@ class Form extends Component {
 		super(props);
 		this.state = {
 			goFordward: false,
-			validacion: false,
-			siguiente: false
+			checked: false,
+			next: false
 		}
 	}
 
@@ -31,30 +30,48 @@ class Form extends Component {
 		}
 		const validaciones = () => {
 			this.setState({
-				validacion: true
+				checked: true
 			});
 			if (model.nombre === '' && model.apellido === '' && model.email === '' && !(/\S+@\S+\.\S+/.test(model.email))) {
 				this.setState({
-					siguiente: false
+					next: false
 				});
 			} else {
 				this.setState({
-					siguiente: true
+					next: true
 				});
 			}
 		}
+		const Header = () => {
+			return(
+				<div>
+				  	<header className="text-center">
+						<div className="prevPage">
+							<NavLink to="/signup">
+								<i className="fa fa-angle-left fa-3x" aria-hidden="true"></i>
+							</NavLink>
+						</div>
+						<h1>Sign up</h1>
+						<h4>Join now for free ride credit</h4>
+						<hr />
+					</header>
+				</div>
+			  )
+		}
+		const NextBtn = () => {
+			return(
+			  <div>
+				<section className="next">
+					{this.state.next && <NavLink to={"/lyftmap"} className="btn btn-lg btn-next" >Next</NavLink>}
+					{!this.state.next && <button className={this.state.goFordward ? "btn-lg btn-next" : "btn-lg btn-next disabled"} disabled={!this.state.goFordward} onClick={validaciones} >Next</button>}
+				</section>
+			  </div>
+			)
+		}
+		
 		return (
 			<div>
-				<header className="text-center">
-					<div className="regresar">
-						<NavLink to="/signup">
-							<i className="fa fa-angle-left fa-3x" aria-hidden="true"></i>
-						</NavLink>
-					</div>
-					<h1>Sign up</h1>
-					<h4>Join now for free ride credit</h4>
-					<hr />
-				</header>
+				<div> {Header()} </div>
 				<section className="container">
 					<div className="input-close">
 						<div className="row">
@@ -63,11 +80,11 @@ class Form extends Component {
 							</div>
 							<div className="col-sm-5 col-xs-5">
 								<input type="text" defaultValue='' placeholder="First Name" onChange={e => model.nombre = e.target.value} />
-								{model.nombre === '' && this.state.validacion && <p className="error">Please enter a name</p>}
+								{model.nombre === '' && this.state.checked && <p className="error">Please enter a name</p>}
 							</div>
 							<div className="col-sm-5 col-xs-5">
 								<input type="text" defaultValue='' placeholder="Last Name" onChange={e => model.apellido = e.target.value} />
-								{model.apellido === '' && this.state.validacion && <p className="error">Please enter a last name</p>}
+								{model.apellido === '' && this.state.checked && <p className="error">Please enter a last name</p>}
 
 							</div>
 						</div>
@@ -79,8 +96,8 @@ class Form extends Component {
 							</div>
 							<div className="col-sm-8 col-xs-8">
 								<input type="email" defaultValue='' placeholder="Email" onChange={e => model.email = e.target.value} />
-								{model.email === '' && this.state.validacion && <p className="error">Please enter an email</p>}
-								{model.email !== '' && !(/\S+@\S+\.\S+/.test(model.email)) && this.state.validacion && <p className="error">Not a valid email</p>}
+								{model.email === '' && this.state.checked && <p className="error">Please enter an email</p>}
+								{model.email !== '' && !(/\S+@\S+\.\S+/.test(model.email)) && this.state.checked && <p className="error">Not a valid email</p>}
 
 							</div>
 						</div>
@@ -95,11 +112,7 @@ class Form extends Component {
 						</div>
 					</div>
 				</section>
-				<section className="next">
-					{this.state.siguiente && <NavLink to={"/lyftmap"} className="btn btn-lg btn-next" id="boton_usuario">Next</NavLink>}
-					{!this.state.siguiente && <button className={this.state.goFordward ? "btn-lg btn-next" : "btn-lg btn-next disabled"} disabled={!this.state.goFordward} onClick={validaciones} id="boton_usuario">Next</button>}
-				</section>
-
+				<div> {NextBtn()} </div>
 			</div>
 		);
 	}

@@ -11,7 +11,7 @@ import {
 import './App.css';
 
 import Home from "./Home.js";
-import SingUp from "./SingUp.js";
+import SignUp from "./SignUp.js";
 import Pin from "./Pin.js";
 import Form from "./form.js";
 import LyftMap from './LyftMap';
@@ -26,7 +26,7 @@ class App extends Component {
             <Route exact path="/"
                   render={() => <Redirect to= {'/home'}/>}/>
             <Route  path="/home" render={() => <Home />}/>
-            <Route  path="/signup" render={() => <SingUp  model={model}/>}/>
+            <Route  path="/signup" render={() => <SignUp  model={model}/>}/>
             <Route  path="/pin" render={() => <Pin model={model}/>}/>
             <Route  path="/signup-form" render={() => <Form model={model}/>}/>
             <Route  path="/lyftmap" render={() => <LyftMap model={model}/>}/>

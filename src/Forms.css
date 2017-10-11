@@ -2,16 +2,6 @@ input{
 	font-size: 120%;
 }
 
-.regresar{
-	position: absolute;
-	top: 2%;
-	left: 5%;
-}
-
-.regresar a{
-	color: black;
-}
-
 #boton_usuario{
 	text-decoration: none;
 	color: white;

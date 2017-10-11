@@ -7,25 +7,88 @@ import {
 	Redirect
 } from 'react-router-dom';
 
-import logo from './logo.svg';
 import './App.css';
 
 class Pin extends Component {
+	constructor(props) {
+		super(props);
+		this.currentPIN = [];
+		this.state = {
+			showPin: false,
+			checked: false,
+			next: false,
+			newPin: undefined
+		}
+	}
+
+	onInputChange = (e) => {
+		this.currentPIN.push(e.target.value);
+		console.log(this.currentPIN);
+		return this.currentPIN;
+	}
+	getPinCode() {
+		if (this.currentPIN.length === 3) {
+			this.setState({
+				checked: true
+			})
+		} else {
+			this.setState({
+				checked: false
+			})
+		}
+	}
+
+	checkPinCode() {
+		this.currentPIN = parseInt(this.currentPIN.join(''));
+		console.log(this.currentPIN);
+		if (this.currentPIN === 523) {
+			this.setState({
+				next: true
+			})
+		}else{
+			this.setState({
+				checked: false,
+				next: false
+			});
+		}
+	}
 	render() {
+		const Header = () => {
+			return (
+				<div>
+					<header className="text-center">
+						<div className="prevPage">
+							<NavLink to="/signup">
+								<i className="fa fa-angle-left fa-3x" aria-hidden="true"></i>
+							</NavLink>
+						</div>
+						<h3>Verify phone number</h3>
+						<h5>Join now for free ride credit</h5>
+						<hr />
+					</header>
+				</div>
+			)
+		}
+
+		const NextBtn = () => {
+			return (
+				<div>
+					<section className="next">
+						{this.state.next && <NavLink to={"/signup-form"} className="btn btn-lg btn-next" > Next</NavLink>}
+						{!this.state.next && <button className={this.state.checked ? "btn-lg btn-next" : "btn-lg btn-next disabled"} disabled={!this.state.checked} onClick={(e) => { this.checkPinCode(e) }}>Next</button>}
+					</section>
+				</div>
+			)
+		}
+
 		return (
 			<div>
-				<header className="text-center">
-					<div className="regresar">
-						<NavLink to="/signup">
-							<i className="fa fa-angle-left fa-3x" aria-hidden="true"></i>
-						</NavLink>
-					</div>
-					<h3>Verify phone number</h3>
-					<h5>Join now for free ride credit</h5>
-					<hr />
-				</header>
-
+				<div> {Header()} </div>
 				<section className="container">
+					<div className="alert text-center">
+						Your PIN number is: <span id="cod-lab"> LAB - 523</span>
+					</div>
+
 					<div className="row">
 						<form className='form-inline'>
 							<div className="col-sm3 col-xs-3 text-center">
@@ -35,13 +98,16 @@ class Pin extends Component {
 							</div>
 							<div className='form-group'>
 								<div className="col-sm3 col-xs-3 text-center">
-									<input type="text" className="text-center randomCode" maxLength="1" />
+									<input type="text" className="text-center randomCode" maxLength="1"
+										onKeyUp={(e) => { this.onInputChange(e) }} />
 								</div>
 								<div className="col-sm3 col-xs-3 text-center">
-									<input type="text" className="text-center randomCode" maxLength="1" />
+									<input type="text" className="text-center randomCode" maxLength="1"
+										onKeyUp={(e) => { this.onInputChange(e) }} />
 								</div>
 								<div className="col-sm3 col-xs-3 text-center">
-									<input type="text" className="text-center randomCode" maxLength="1" />
+									<input type="text" className="text-center randomCode" maxLength="1"
+										onKeyUp={(e) => { this.onInputChange(e) }} onBlur={() => { this.getPinCode() }} />
 								</div>
 							</div>
 						</form>
@@ -50,90 +116,12 @@ class Pin extends Component {
 					<div className="row text-center">
 						Enter the code sent to <p id="prevPhoneNum"></p>
 					</div>
-					<div className="row text-center">
-						<button type="submit" className="btn" id="codeGenerator">
-							Resend code
-            </button>
-					</div>
 				</section>
 
-				<section className="next">
-					<NavLink to={"/signup-form"} className="btn btn-lg btn-next" >Next</NavLink>
-				</section>
+				<div> {NextBtn()} </div>
 			</div>
 		);
 	}
 }
 
 export default Pin;
-/**
- * (function() {
-	let loadSite = function(){
-		let getNumber = localStorage.getItem('phoneNum');
-		$('#prevPhoneNum').text(getNumber);
-		$('#codeGenerator').click(generateCode);
-		$('.randomCode').keyup(checkInputInfo).keyup(nextBlankSpace);
-		$('#checkCode').click(checkCode);
-		generateCode();
-	}
-	let generateCode = function(){
-		let codeArray = [];
-		let code = '';
-		let abc = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-		for(let i = 0; i < 3; i++){
-			code += abc.charAt(Math.floor(Math.random()*abc.length));
-		}
-		console.log(code);
-		localStorage.setItem('savedNumber',code);
-		swal("Your Lyft code is:", "LAB " + code );	
-	}
-
-	let checkInputInfo = function(){	
-		let btn_checkInfo = $(this).parents('.container').next().children().eq(0);
-		console.log(btn_checkInfo);
-		let isOk = true;
-		$('.randomCode').each(function(index, element){
-			let inputsLength = $(element).val().trim().length;
-			isOk = isOk && (inputsLength === 1);
-		});
-		if(isOk){
-			btn_checkInfo.removeAttr('disabled');
-		}else{
-			btn_checkInfo.attr('disabled',true);
-		}	
-	}
-
-	let loadHTML = function(){
-		setTimeout(function(){
-			location.href = "registrationData.html";
-		},700);
-	}
-
-	let checkCode = function(serie){
-		let arrayCode = [];
-		$('.randomCode').each(function(index, element){
-			let digitValue = $(element).val();
-			digitValue = digitValue.toUpperCase();
-			arrayCode.push(digitValue);
-		});
-		let codeChain = arrayCode.join('');
-		let getSavedNumber = localStorage.getItem('savedNumber');
-		if(codeChain === getSavedNumber){
-			swal("Welcome to Lyft!",'Your code is valid', "success");	
-			loadHTML();
-		}else{	
-			swal ( "Something went wrong" ,  "Try again!" ,  "error" );
-		}
-		$('randomCode').val('');
-	}
-	let nextBlankSpace = function(){
-		let element = $(this).val().length;
-		let nextSibling = $(this).parent().next().children();
-		let atrrElement = $(this).attr('maxlength');
-		if (element == atrrElement){
-			nextSibling.focus();	
-		}
-	}
-	$(document).ready(loadSite);
-})();
- */

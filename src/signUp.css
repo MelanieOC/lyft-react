@@ -10,18 +10,3 @@ input{
 	width: 60%;
 	display: inline-block;
 }
-
-.regresar{
-	position: absolute;
-	top: 2%;
-	left: 5%;
-}
-
-.regresar a{
-	color: black;
-}
-
-#boton_telefono{
-	text-decoration: none;
-	color: white;
-}

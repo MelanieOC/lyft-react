@@ -63,19 +63,37 @@ class Pin extends Component {
 				next: true
 			});
 		}
-		 
+		
+		const Header = () => {
+			return(
+				<div>
+				  	<header className="text-center">
+					  <div className="prevPage">
+						  <NavLink to="/signup">
+							  <i className="fa fa-angle-left fa-3x" aria-hidden="true"></i>
+						  </NavLink>
+					  </div>
+					  <h3>Verify phone number</h3>
+					  <h5>Join now for free ride credit</h5>
+					  <hr />
+				  </header>
+				</div>
+			)
+		}
+		const NextBtn = () => {
+			return(
+			  <div>
+				<section className="next">
+					{this.state.next && <NavLink to={"/signup-form"} className="btn btn-lg btn-next" > Next</NavLink>}
+					{!this.state.next && <button className={this.state.checked ? "btn-lg btn-next" : "btn-lg btn-next disabled"} disabled={!this.state.checked} onClick={(e) => { this.checkPinCode(e) }}>Next</button>}
+				</section>
+			  </div>
+			)
+		}
+
 		return (
 			<div>
-				<header className="text-center">
-					<div className="prevPage">
-						<NavLink to="/signup">
-							<i className="fa fa-angle-left fa-3x" aria-hidden="true"></i>
-						</NavLink>
-					</div>
-					<h3>Verify phone number</h3>
-					<h5>Join now for free ride credit</h5>
-					<hr />
-				</header>
+				<div> {Header()} </div>
 
 				<section className="container">
 					<div className="alert text-center">
@@ -111,10 +129,7 @@ class Pin extends Component {
 					</div>
 				</section>
 
-				<section className="next">
-					{this.state.next && <NavLink to={"/signup-form"} className="btn btn-lg btn-next" > Next</NavLink>}
-					{!this.state.next && <button className={this.state.checked ? "btn-lg btn-next" : "btn-lg btn-next disabled"} disabled={!this.state.checked} onClick={(e) => { this.checkPinCode(e) }}>Next</button>}
-				</section>
+				<div> {NextBtn()} </div>
 			</div>
 		);
 	}

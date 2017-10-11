@@ -67,7 +67,8 @@ class Form extends Component {
 				</section>
 			  </div>
 			)
-		  }
+		}
+		
 		return (
 			<div>
 				<div> {Header()} </div>

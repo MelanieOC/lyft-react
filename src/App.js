@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 //https://maps.googleapis.com/maps/api/js?key=AIzaSyCl5FxNRuSN9tRMoZFJsH_q511Zt6DBVH4&libraries=places
 //AIzaSyCl5FxNRuSN9tRMoZFJsH_q511Zt6DBVH4
 import {
-	BrowserRouter,
-	Route,
-	Switch,
-	NavLink,
-	Redirect
+  BrowserRouter,
+  Route,
+  Switch,
+  NavLink,
+  Redirect
 } from 'react-router-dom';
 import './App.css';
 
@@ -17,16 +17,19 @@ import Form from "./form.js";
 import LyftMap from "./Map.js";
 
 const NotFound = (props) => {
-	return (
-		<div><h2> Error 404! </h2></div>
-	);
+  return (
+    <div><h2> Error 404! </h2></div>
+  );
 }
 
 class App extends Component {
   render() {
     const { model } = this.props;
     return (
-      <BrowserRouter>
+      <div>
+        <LyftMap model={model} />
+      </div>
+      /*<BrowserRouter>
         <div>
           <Switch>
             <Route exact path="/"
@@ -40,7 +43,7 @@ class App extends Component {
             <Route render={() => <Redirect to= {'/home'}/>}/>
           </Switch>
         </div>
-      </BrowserRouter>
+      </BrowserRouter>*/
     );
   }
 }

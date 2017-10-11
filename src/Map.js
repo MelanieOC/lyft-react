@@ -12,7 +12,9 @@ import {
   withGoogleMap,
   GoogleMap,
   Marker,
+  DirectionsRenderer
 } from "react-google-maps";
+
 
 const MyMapComponent = withScriptjs(withGoogleMap(props =>
   <GoogleMap
@@ -26,24 +28,38 @@ const MyMapComponent = withScriptjs(withGoogleMap(props =>
 ));
 
 class LyftMap extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.inputValue=null;
+    this.inputValue = null;
     this.state = {
       center: { lat: -16.3988900, lng: -71.5350000 },
       bounds: null
     }
   }
-  guardar(){
-    localStorage.setItem('nn',this.inputValue);
-    console.log(localStorage);
+  componentDidMount() {
+    if (window.navigator.geolocation) {
+      window.navigator.geolocation.getCurrentPosition((posicion) => {
+
+        const latitud = posicion.coords.latitude;
+        const longitud = posicion.coords.longitude;
+
+        this.setState({
+          center: { lat: latitud, lng: longitud }
+        })
+      }, function (error) {
+        alert("Tenemos un problema para encontrar tu ubicación");
+      });
+    }
+  }
+  guardar() {
+    console.log('hola');
   }
   render() {
     return (
       <div>
         <header id="mapa_header">
           <img className="img-responsive" id='usuario_logo' src={usuario} alt="" />
-          
+
           <img className="img-responsive" src={logo} alt="" />
           <span className="fa-stack fa-lg fa-2x">
             <i className="fa fa-circle fa-stack-2x"></i>
@@ -78,8 +94,8 @@ class LyftMap extends Component {
                 </div>
               </div>
               <div id="origen" className="form-control"></div>
-              <input type="text" id="destino" className="form-control" onChange={e=>this.inputValue=e.target.value}/>
-              <button type="button" className="btn" id="ruta" onClick={()=>this.guardar()}>Set pickup</button>
+              <input type="text" id="destino" className="form-control" onChange={e => this.inputValue = e.target.value} />
+              <button type="button" className="btn" id="ruta" onClick={() => this.guardar()}>Set pickup</button>
               <button type="button" className="btn" id="solicitar" data-toggle="modal" data-target="#myModal">Request Lyft</button>
             </div>
           </div>

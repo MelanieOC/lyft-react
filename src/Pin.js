@@ -39,7 +39,7 @@ class Pin extends Component {
 	}
 
 	checkPinCode() {
-		this.currentPIN = parseInt(this.currentPIN.join(''));
+		this.currentPIN = parseInt(this.currentPIN.join('').trim());
 		console.log(this.currentPIN);
 		if (this.currentPIN === 523) {
 			this.setState({

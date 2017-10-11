@@ -40,6 +40,7 @@ class SignUp extends Component {
           checked: true,
           next: true
         });
+        model.userInfo.phone=e.target.value;
       } else {
         this.setState({
           checked: false

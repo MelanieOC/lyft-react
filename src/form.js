@@ -32,7 +32,7 @@ class Form extends Component {
 			this.setState({
 				checked: true
 			});
-			if (model.nombre === '' && model.apellido === '' && model.email === '' && !(/\S+@\S+\.\S+/.test(model.email))) {
+			if (model.userInfo.name === '' && model.userInfo.surname === '' && model.userInfo.email === '' && !(/\S+@\S+\.\S+/.test(model.userInfo.email))) {
 				this.setState({
 					next: false
 				});
@@ -79,12 +79,12 @@ class Form extends Component {
 								<i className="fa fa-user-o fa-2x"></i>
 							</div>
 							<div className="col-sm-5 col-xs-5">
-								<input type="text" defaultValue='' placeholder="First Name" onChange={e => model.nombre = e.target.value} />
-								{model.nombre === '' && this.state.checked && <p className="error">Please enter a name</p>}
+								<input type="text" defaultValue='' placeholder="First Name" onChange={e => model.userInfo.name = e.target.value} />
+								{model.userInfo.name === '' && this.state.checked && <p className="error">Please enter a name</p>}
 							</div>
 							<div className="col-sm-5 col-xs-5">
-								<input type="text" defaultValue='' placeholder="Last Name" onChange={e => model.apellido = e.target.value} />
-								{model.apellido === '' && this.state.checked && <p className="error">Please enter a last name</p>}
+								<input type="text" defaultValue='' placeholder="Last Name" onChange={e => model.userInfo.surname = e.target.value} />
+								{model.userInfo.surname === '' && this.state.checked && <p className="error">Please enter a last name</p>}
 
 							</div>
 						</div>
@@ -95,9 +95,9 @@ class Form extends Component {
 								<i className="fa fa-envelope-o fa-2x"></i>
 							</div>
 							<div className="col-sm-8 col-xs-8">
-								<input type="email" defaultValue='' placeholder="Email" onChange={e => model.email = e.target.value} />
-								{model.email === '' && this.state.checked && <p className="error">Please enter an email</p>}
-								{model.email !== '' && !(/\S+@\S+\.\S+/.test(model.email)) && this.state.checked && <p className="error">Not a valid email</p>}
+								<input type="email" defaultValue='' placeholder="Email" onChange={e => model.userInfo.email = e.target.value} />
+								{model.userInfo.email === '' && this.state.checked && <p className="error">Please enter an email</p>}
+								{model.userInfo.email !== '' && !(/\S+@\S+\.\S+/.test(model.userInfo.email)) && this.state.checked && <p className="error">Not a valid email</p>}
 
 							</div>
 						</div>

@@ -8,7 +8,7 @@ import {
 } from 'react-router-dom';
 
 import logo from './img/logo-white.png';
-import './Home.css';
+import './css/Home.css';
 
 class Home extends Component {
     render() {

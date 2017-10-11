@@ -10,11 +10,11 @@ import {
 } from 'react-router-dom';
 import './App.css';
 
-import Home from "./Home.js";
-import SingUp from "./SingUp.js";
-import Pin from "./Pin.js";
-import Form from "./form.js";
-import LyftMap from "./Map.js";
+import Home from "./js/Home.js";
+import SingUp from "./js/SingUp.js";
+import Pin from "./js/Pin.js";
+import Form from "./js/form.js";
+import LyftMap from "./js/Map.js";
 
 const NotFound = (props) => {
 	return (

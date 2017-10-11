@@ -8,8 +8,8 @@ import {
   Redirect
 } from 'react-router-dom';
 
-import './signUp.css';
-import Utils from './Utils';
+import './css/signUp.css';
+import Utils from './js/Utils';
 import flag_chile from './img/flag_chile.png';
 import flag_peru from './img/flag_peru.png';
 import flag_mexico from './img/flag_mexico.png';

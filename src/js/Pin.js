@@ -8,7 +8,7 @@ import {
 } from 'react-router-dom';
 
 import logo from './logo.svg';
-import './App.css';
+import './css/App.css';
 
 class Pin extends Component {
 	render() {

@@ -45,84 +45,74 @@ class HeaderMap extends Component {
 				<div id="mySidenav" className="sidenav" style={{ width: this.state.show ? '250px' : 0 }}>
 					<a href="javascript:void(0)" className="closebtn" onClick={close}>&times;</a>
 					<div id="datos_usuario">
-
+						{Object.keys(model.userInfo).map(key => {
+							let value = model.userInfo[key];
+							return <div><strong>{key}</strong>{value}</div>
+						})}
 					</div>
 				</div>
 			</header>
-		);
+				);
 	}
 }
-const MapPrice = ({ model }) => {
+const MapPrice = ({model}) => {
 	return (
 		<div>
-			<div>
-				<div className="well precio">
-					<img src={carro} alt="carro" />
-					<span><h4>Lyft</h4><p>Fast ride 4 seats</p></span>
-				</div>
-				<div className="well precio">
-					<div className="text-center">
-						<p id="precio">{model.precio}</p>
-						<p>Price stimated</p>
-					</div>
-				</div>
+					<div>
+						<div className="well precio">
+							<img src={carro} alt="carro" />
+							<span><h4>Lyft</h4><p>Fast ride 4 seats</p></span>
+						</div>
+						<div className="well precio">
+							<div className="text-center">
+								<p id="precio">{model.precio}</p>
+								<p>Price stimated</p>
+							</div>
+						</div>
 
-			</div>
-			<button type="button" className="btn" id="solicitar" data-toggle="modal" data-target="#myModal">Request Lyft</button>
-			<div id="myModal" class="modal fade" role="dialog">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
-							<h4 class="modal-title text-center">Tu lyft está en camino</h4>
-						</div>
-						<div class="modal-body">
-							<NavLink to={"/lyftmap"} class="btn" id="otro_viaje">Otro viaje</NavLink>
-						</div>
 					</div>
+					<NavLink to={"/nextTrip"} type="button" className="btn" id="solicitar">Request Lyft</NavLink>
 				</div>
-			</div>
-		</div>
-	);
+				);
 }
-const MapSetpickup = ({ model }) => {
+const MapSetpickup = ({model}) => {
 	const onPathBntClick = () => {
-		model.setIsRouting();
-	}
+					model.setIsRouting();
+				}
 	return (
 		<div>
-			<div id="origen" className="form-control"></div>
-			<ReactGoogleAutocomplete
-				onPlaceSelected={(place) => {
-					model.setTarget(place);
-				}}
-				componentRestrictions={{ country: "pe" }}
-				id="destino" className="form-control"
-			/>
-			<button type="button" className="btn" id="ruta" onClick={onPathBntClick}>Set pickup</button>
-		</div>
-	);
+					<div id="origen" className="form-control"></div>
+					<ReactGoogleAutocomplete
+						onPlaceSelected={(place) => {
+							model.setTarget(place);
+						}}
+						componentRestrictions={{ country: "pe" }}
+						id="destino" className="form-control"
+					/>
+					<button type="button" className="btn" id="ruta" onClick={onPathBntClick}>Set pickup</button>
+				</div>
+				);
 }
 
-const MapForm = ({ model }) => {
+const MapForm = ({model}) => {
 	return (
 		<div className="container">
-			<div className="row">
-				<div id="menu_mapa" className="col-sm-12 col-xs-12">
-					{model.isRouting ?
-						<MapPrice model={model} /> :
-						<MapSetpickup model={model} />
+					<div className="row">
+						<div id="menu_mapa" className="col-sm-12 col-xs-12">
+							{model.isRouting ?
+								<MapPrice model={model} /> :
+								<MapSetpickup model={model} />
 
-					}
+							}
+						</div>
+					</div>
 				</div>
-			</div>
-		</div>
-	);
+				);
 }
-const LyftMap = ({ model }) => {
+const LyftMap = ({model}) => {
 
 	const state = {
-		properties: model.properties,
+					properties: model.properties,
 		activeProperty: model.activeProperty,
 		filterIsVisible: false,
 		filteredProperties: [],
@@ -130,8 +120,8 @@ const LyftMap = ({ model }) => {
 		isRouting: model.isRouting
 	};
 	const {
-		properties,
-		activeProperty,
+					properties,
+				activeProperty,
 		filterIsVisible,
 		filteredProperties,
 		isFiltering,
@@ -140,9 +130,9 @@ const LyftMap = ({ model }) => {
 	const propertiesList = isFiltering ? filteredProperties : properties;
 
 	const setActiveProperty = (property, scroll) => {
-		model.setActiveProperty(property);
+					model.setActiveProperty(property);
 
-		const { index } = property;
+				const {index} = property;
 		if (scroll) {
 			const target = `#card-${index}`;
 		}
@@ -151,21 +141,21 @@ const LyftMap = ({ model }) => {
 
 	return (<div>
 
-		<HeaderMap />
+					<HeaderMap />
 
-		<GoogleMaps
-			model={model}
-			properties={properties}
-			activeProperty={activeProperty}
-			setActiveProperty={setActiveProperty}
-			filteredProperties={filteredProperties}
-			isFiltering={isFiltering}
-			isRouting={isRouting}
-		/>
+					<GoogleMaps
+						model={model}
+						properties={properties}
+						activeProperty={activeProperty}
+						setActiveProperty={setActiveProperty}
+						filteredProperties={filteredProperties}
+						isFiltering={isFiltering}
+						isRouting={isRouting}
+					/>
 
-		<MapForm model={model} />
+					<MapForm model={model} />
 
-	</div>);
+				</div>);
 }
 
 

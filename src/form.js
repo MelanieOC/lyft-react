@@ -28,7 +28,7 @@ class Form extends Component {
 				goFordward: e.target.checked
 			});
 		}
-		const validaciones = () => {
+		const checkForm = () => {
 			this.setState({
 				checked: true
 			});
@@ -63,7 +63,7 @@ class Form extends Component {
 			  <div>
 				<section className="next">
 					{this.state.next && <NavLink to={"/lyftmap"} className="btn btn-lg btn-next" >Next</NavLink>}
-					{!this.state.next && <button className={this.state.goFordward ? "btn-lg btn-next" : "btn-lg btn-next disabled"} disabled={!this.state.goFordward} onClick={validaciones} >Next</button>}
+					{!this.state.next && <button className={this.state.goFordward ? "btn-lg btn-next" : "btn-lg btn-next disabled"} disabled={!this.state.goFordward} onClick={checkForm} >Next</button>}
 				</section>
 			  </div>
 			)

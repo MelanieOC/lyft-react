@@ -30,16 +30,18 @@ class Pin extends Component {
 		if (this.currentPIN.length === 3) {
 			this.setState({
 				checked: true
-			})
+			});
+			this.currentPIN = parseInt(this.currentPIN.join(''));
 		} else {
+			this.currentPIN = parseInt(this.currentPIN.join('').trim());
+			console.log(this.currentPIN)
 			this.setState({
-				checked: false
+				checked: true
 			})
 		}
 	}
 
 	checkPinCode() {
-		this.currentPIN = parseInt(this.currentPIN.join('').trim());
 		console.log(this.currentPIN);
 		if (this.currentPIN === 523) {
 			this.setState({

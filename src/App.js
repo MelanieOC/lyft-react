@@ -15,6 +15,7 @@ import SignUp from "./SignUp.js";
 import Pin from "./Pin.js";
 import Form from "./form.js";
 import LyftMap from './LyftMap';
+import NextTrip from './NextTrip';
 
 class App extends Component {
   render() {
@@ -30,7 +31,7 @@ class App extends Component {
             <Route  path="/pin" render={() => <Pin model={model}/>}/>
             <Route  path="/signup-form" render={() => <Form model={model}/>}/>
             <Route  path="/lyftmap" render={() => <LyftMap model={model}/>}/>
-
+            <Route  path="/nextTrip" render={() => <NextTrip model={model}/>}/>
             <Route render={() => <Redirect to= {'/home'}/>}/>
           </Switch>
         </div>

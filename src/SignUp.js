@@ -13,6 +13,25 @@ import flag_chile from './img/flag_chile.png';
 import flag_peru from './img/flag_peru.png';
 import flag_mexico from './img/flag_mexico.png';
 
+class Header extends Component{
+  render(){
+    return(
+      <div>
+        <header className="text-center">
+          <div className="prevPage">
+            <NavLink to="/home">
+              <i className="fa fa-angle-left fa-3x" aria-hidden="true"></i>
+            </NavLink>
+          </div>
+          <h1>Sign up</h1>
+          <h4>Join now for free ride credit</h4>
+          <hr />
+        </header>
+      </div>
+    )
+  }
+}
+
 class SignUp extends Component {
   constructor(props) {
     super(props);
@@ -52,19 +71,21 @@ class SignUp extends Component {
         next: true
       });
     }
+
+    const NextBtn = () => {
+      return(
+        <div>
+          <section className="next">
+            {this.state.next && <NavLink to={"/pin"} className="btn btn-lg btn-next" > Next</NavLink>}
+            {!this.state.next && <button className={this.state.checked ? "btn-lg btn-next" : "btn-lg btn-next disabled"} disabled={!this.state.checked} onClick={showPin}>Next</button>}
+          </section>
+        </div>
+      )
+    }
+
     return (
       <div>
-        <header className="text-center">
-          <div className="prevPage">
-            <NavLink to="/home">
-              <i className="fa fa-angle-left fa-3x" aria-hidden="true"></i>
-            </NavLink>
-          </div>
-          <h1>Sign up</h1>
-          <h4>Join now for free ride credit</h4>
-          <hr />
-        </header>
-
+        <Header />
         <section className="container">
           <div className="input-close container">
             <div className="row">
@@ -102,10 +123,9 @@ class SignUp extends Component {
             </div>
           }
         </section>
-        <section className="next">
-          {this.state.next && <NavLink to={"/pin"} className="btn btn-lg btn-next" > Next</NavLink>}
-          {!this.state.next && <button className={this.state.checked ? "btn-lg btn-next" : "btn-lg btn-next disabled"} disabled={!this.state.checked} onClick={showPin}>Next</button>}
-        </section>
+        <div>
+          {NextBtn()}
+        </div>
       </div>
     );
   }
